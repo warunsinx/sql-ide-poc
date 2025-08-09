@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { runQuery as runSqlQuery } from "@/services/db";
 
-export type QueryState = {
+export type SheetaState = {
   query: string;
   rows: Array<Record<string, unknown>>;
   columns: string[];
@@ -11,7 +11,7 @@ export type QueryState = {
   runQuery: () => Promise<void>;
 };
 
-export const useQueryStore = create<QueryState>((set, get) => ({
+export const useSheetaStore = create<SheetaState>((set, get) => ({
   query: "",
   rows: [],
   columns: [],

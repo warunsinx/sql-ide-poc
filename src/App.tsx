@@ -3,10 +3,10 @@ import Sidebar from "@/components/layout/Sidebar";
 import HeaderBar from "@/components/layout/HeaderBar";
 import SqlEditor from "@/components/editor/SqlEditor";
 import ResultsTable from "@/components/results/ResultsTable";
-import { useQueryStore } from "@/stores/useQueryStore";
+import { useSheetaStore } from "@/stores/useSheetaStore";
 
 function App() {
-  const { query, setQuery, rows, columns, runQuery } = useQueryStore();
+  const { query, setQuery, rows, columns, runQuery } = useSheetaStore();
 
   return (
     <div className="h-screen w-full flex">
