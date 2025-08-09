@@ -7,26 +7,26 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { toast } from "sonner";
-import { useState } from "react";
-import { useConnectionsStore } from "@/stores/useConnectionsStore";
-import { SidebarMenu, SidebarMenuItem } from "../ui/sidebar";
-import { SidebarMenuButton } from "../ui/sidebar";
-import { LucideDatabase, LucidePlus } from "lucide-react";
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { toast } from 'sonner';
+import { useState } from 'react';
+import { useConnectionsStore } from '@/stores/useConnectionsStore';
+import { SidebarMenu, SidebarMenuItem } from '../ui/sidebar';
+import { SidebarMenuButton } from '../ui/sidebar';
+import { LucidePlus } from 'lucide-react';
 
 export default function AddConnectionBtn() {
   const { testConnection, addConnection } = useConnectionsStore();
 
   const [open, setOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [host, setHost] = useState("");
-  const [port, setPort] = useState("5432");
-  const [database, setDatabase] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState('');
+  const [host, setHost] = useState('');
+  const [port, setPort] = useState('5432');
+  const [database, setDatabase] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [isTesting, setIsTesting] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
 
@@ -37,16 +37,16 @@ export default function AddConnectionBtn() {
     database: database.trim(),
     username: username.trim(),
     password,
-    type: "postgres" as const,
+    type: 'postgres' as const,
   });
 
   const validate = (isTest: boolean = false) => {
-    if (!name.trim() && !isTest) return "Connection Name is required.";
-    if (!host.trim()) return "Host is required.";
-    if (!database.trim()) return "Database is required.";
-    if (!username.trim()) return "Username is required.";
+    if (!name.trim() && !isTest) return 'Connection Name is required.';
+    if (!host.trim()) return 'Host is required.';
+    if (!database.trim()) return 'Database is required.';
+    if (!username.trim()) return 'Username is required.';
     if (!port || Number.isNaN(Number.parseInt(port, 10)))
-      return "Valid port is required.";
+      return 'Valid port is required.';
     return undefined;
   };
 
@@ -59,10 +59,10 @@ export default function AddConnectionBtn() {
     setIsTesting(true);
     try {
       await testConnection(buildConn());
-      toast.success("Connection test succeeded.");
+      toast.success('Connection test succeeded.');
     } catch (err) {
       console.error(err);
-      toast.error("Connection test failed.");
+      toast.error('Connection test failed.');
     } finally {
       setIsTesting(false);
     }
@@ -77,18 +77,18 @@ export default function AddConnectionBtn() {
     setIsSaving(true);
     try {
       await addConnection(buildConn());
-      toast.success("Connection saved.");
+      toast.success('Connection saved.');
       setOpen(false);
       // reset form
-      setName("");
-      setHost("");
-      setPort("5432");
-      setDatabase("");
-      setUsername("");
-      setPassword("");
+      setName('');
+      setHost('');
+      setPort('5432');
+      setDatabase('');
+      setUsername('');
+      setPassword('');
     } catch (err) {
       console.error(err);
-      toast.error("Failed to save connection.");
+      toast.error('Failed to save connection.');
     } finally {
       setIsSaving(false);
     }
@@ -154,7 +154,7 @@ export default function AddConnectionBtn() {
             onClick={handleTestConnection}
             disabled={isTesting || isSaving}
           >
-            {isTesting ? "Testing..." : "Test Connection"}
+            {isTesting ? 'Testing...' : 'Test Connection'}
           </Button>
           <DialogClose asChild>
             <Button variant="outline">Cancel</Button>
@@ -164,7 +164,7 @@ export default function AddConnectionBtn() {
             onClick={handleSave}
             disabled={isSaving || isTesting}
           >
-            {isSaving ? "Saving..." : "Save"}
+            {isSaving ? 'Saving...' : 'Save'}
           </Button>
         </DialogFooter>
       </DialogContent>
