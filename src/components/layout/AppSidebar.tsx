@@ -6,10 +6,11 @@ function AppSidebar(): React.ReactElement {
   return (
     <Sidebar>
       <SidebarContent>
-        <div className="w-full h-[100px] border-b-2 flex justify-center items-center">
+        <div className="w-full h-[100px] border-b-2 flex flex-col justify-center items-center">
           <p className="font-bold text-2xl text-gray-700 select-none">
             SHEETA.AI
           </p>
+          <p className="text-gray-500 text-xs">v0.0.1</p>
         </div>
         <ConnectionList />
       </SidebarContent>
