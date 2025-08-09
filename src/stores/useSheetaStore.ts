@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { runQuery as runSqlQuery } from "@/services/db";
+import { useConnectionsStore } from "@/stores/useConnectionsStore";
 
 export type SheetaState = {
   query: string;
@@ -26,7 +27,12 @@ export const useSheetaStore = create<SheetaState>((set, get) => ({
   runQuery: async () => {
     try {
       const sql = get().query;
-      const result = await runSqlQuery(sql);
+      // Get active connection URL (if any)
+      const { getActiveConnection, buildDatabaseUrl } =
+        useConnectionsStore.getState();
+      const active = getActiveConnection();
+      const dbUrl = active ? buildDatabaseUrl(active) : undefined;
+      const result = await runSqlQuery(sql, dbUrl);
 
       if (result.length > 0) {
         const firstRow = result[0] as Record<string, unknown>;
